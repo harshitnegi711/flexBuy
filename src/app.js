@@ -23,6 +23,6 @@ app.use(express.json({ limit: "20kb" }))
 app.use(express.urlencoded({ extended: true, limit: "20kb" }))
 
 
-app.use("/dukan/api/v1/", router)
+app.use("/flexbuy/api/v1/", router)
 
 export default app
