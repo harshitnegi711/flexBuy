@@ -3,6 +3,7 @@
 // Setup Express server ------- done 
 // Connect MongoDB  ---------- done
 // Create User model -------------- done
+// file upload ----------------- done
 // Implement JWT auth
 // Create Product model
 // Add image upload
