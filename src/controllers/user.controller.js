@@ -5,6 +5,8 @@ import { User } from "../models/user.model.js";
 import UploadOnCloudinary from "../utils/UploadOnCloudinary.js";
 import jwt from "jsonwebtoken"
 
+// ---------------- Creating new user ------------------------ //
+
 const createUser = AsyncHandler(async (req, res) => {
 
   const { fullName, username, email, password, gender } = req.body
