@@ -4,9 +4,9 @@
 // Connect MongoDB  ---------- done
 // Create User model -------------- done
 // file upload ----------------- done
-// Implement JWT auth
-// Create Product model
-// Add image upload
+// Implement JWT auth ----------------- done
+// Create Product model -------------- done
+// Add image upload --------------- done
 // Create Cart & Order APIs
 // Add payment gateway
 
