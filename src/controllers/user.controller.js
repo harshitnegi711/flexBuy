@@ -137,7 +137,33 @@ const logOut = AsyncHandler(async (req, res) => {
     .json(ApiResponse(200, loggedOutUser, "successfully logged out."))
 })
 
+// --------------------------------- regenerate access Token -----------------------//
+
+
+const newAccessToken = AsyncHandler(async (req, res) => {
+  const refreshToken = req.cookies.refreshToken
+  if (!refreshToken) throw new ApiError(400, "refreshToken missing")
+
+  const decodedRefreshToken = jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET)
+
+  const user = await User.findById(decodedRefreshToken.id)
+
+  if (!user) throw new ApiError(401, "invalid Refresh token")
+
+  if (user.refreshToken !== refreshToken) throw new ApiError(401, "refreshToken didi not match")
+
+
+  const newAccessToken = jwt.sign({ id: user._id, username: user.username, email: user.email },
+    process.env.ACCESS_TOKEN_SECRET, { expiresIn: process.env.ACCESS_TOKEN_EXPIRY })
+
+  const options = { httpOnly: true, secure: true }
+
+  res.status(200).cookie("accessToken", newAccessToken, options)
+    .json(ApiResponse(200, newAccessToken, "token created "))
+
+})
 
 
 
-export { createUser, uploadAvatar, getAllUsers, login, logOut }
+
+export { createUser, uploadAvatar, getAllUsers, login, logOut, newAccessToken }
